@@ -91,12 +91,29 @@ def convert_to_pdf(input_dir, output_dir):
 				continue
 		os.system(f'tectonic -o {output_dir} {input_dir}/{f}')
 
+def ask_for_author():
+	authors = ['Alejo Perdomo Milar', 'João Mário C. I. Lago', 'Alejo Perdomo Milar e João Mário C. I. Lago']
+	authors_str = 'Authors:\n'
+	for i, author in enumerate(authors):
+		authors_str += (f'{i+1}. {author}\n')
+	author = input(f'Enter the author of the document: \n {authors_str}')
+	return authors[int(author)-1]
+
+def ask_for_subjects():
+	subjects = ['Cálculo numérico']
+	subjects_str = 'Subjects:\n'
+	for i, subject in enumerate(subjects):
+		subjects_str += (f'{i+1}. {subject}\n')
+	subject = input(f'Enter the subject of the document: \n {subjects_str}')
+	return subjects[int(subject)-1]
+
+
 if __name__ == "__main__":
 	latex_dir = 'latex_alejo'
 	fixed_files_dir = latex_dir + '/fixed-files'
 	pdf_dir = 'pdf_alejo'
-	author = 'Alejo Perdomo Milar e João Mário C. I. Lago'
-	subject = 'Calculo Numerico'
+	author = ask_for_author()
+	subject = ask_for_subjects()
 
 	create_directory(latex_dir)
 	files = get_notebook_files()
